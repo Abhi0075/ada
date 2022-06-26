@@ -1,0 +1,91 @@
+#include<iostream>
+#include<time.h>
+using namespace std;
+void merge(int a[],int beg,int mid,int end)
+{
+        int i,j,k,n;
+        int n1=mid-beg+1;
+        int n2=end-mid;
+        int leftarray[n1],rightarray[n2];
+        for(int i=0;i<n;i++)
+        {
+                leftarray[i]=a[beg+i];
+        }
+        for(int j=0;j<n;j++)
+        {
+                rightarray[j]=a[mid+1+j];
+        }
+        i=0;
+        j=0;
+        k=beg;
+        while(i<n1&&j<n2)
+        {
+                if(leftarray[i]<=rightarray[j])
+                {
+                        a[k]=leftarray[i];
+                        i++;
+                }
+                else
+                {
+                        a[k]=rightarray[j];
+                        j++;
+                }k++;
+        }
+        while(i<n1)
+        {
+                a[k]=leftarray[i];
+                i++;
+                k++;
+        }
+        while(i<n2)
+        {
+                a[k]=rightarray[j];
+                j++;
+                k++;
+        }
+}
+
+void ms(int a[],int beg,int end)
+{
+        if(beg<end)
+        {
+                int mid=(beg+end)/2;
+                ms(a,beg,mid);
+                ms(a,mid+1,end);
+                merge(a,beg,mid,end);
+        }
+}
+void printarray(int a[],int n)
+{
+        int i;
+
+        for(i=0;i<n;i++)
+                cout<<a[i]<<"  ";
+}
+int main()
+{
+        int n,i;
+        int k=0;int j=1000;
+        clock_t start,end;
+        while(k<100)
+        {
+                n=j;
+                j+=1000;
+                int a[n];
+                //srand(time(0));
+                for(i=0;i<n;i++)
+                {
+                        a[i]=rand()%20000;
+                }
+                start =clock();
+                ms(a,0,n-1);
+
+                end=clock();
+                                double d= end-start;
+                                cout<<n<<"\t"<<d<<"\n";
+                                k++;
+                                }
+                                return 0;
+                                }
+
+
