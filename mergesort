@@ -55,13 +55,6 @@ void ms(int a[],int beg,int end)
                 merge(a,beg,mid,end);
         }
 }
-void printarray(int a[],int n)
-{
-        int i;
-
-        for(i=0;i<n;i++)
-                cout<<a[i]<<"  ";
-}
 int main()
 {
         int n,i;
