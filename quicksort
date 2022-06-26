@@ -1,0 +1,67 @@
+#include<iostream>
+#include<time.h>
+using namespace std;
+
+int partition(int a[],int l,int h)
+{
+        int pivot=a[l];
+        int i=l;int j=h;
+
+        while(i<j)
+        {
+                do
+                {
+                        i++;
+                }while(a[i]<=pivot);
+                 do
+                {
+                       j--;
+                }while(a[j]>pivot);
+
+                        if(i<j)
+                        {
+                        int temp=a[i];
+                        a[i]=a[j];
+                        a[j]=temp;
+                        }
+        }
+        int temp=a[l];
+         a[l]=a[j];
+         a[j]=temp;
+         return j;
+}
+
+void qs(int a[],int l,int h)
+{
+ if(l<h)
+ {
+ int j=partition(a,l,h);
+ qs(a,l,j);
+ qs(a,j+1,h);
+ }
+}
+
+int main()
+{
+        int n,i;
+        int k=0;int j=1000;
+        clock_t start,end;
+        while(k<100)
+        {
+                n=j;
+                j+=1000;
+                int a[n];
+                //srand(time(0));
+                for(i=0;i<n;i++)
+                {
+                        a[i]=rand()%20000;
+                }
+                start = clock();
+                qs(a,0,n-1);
+                end = clock();
+                double d= end-start;
+                cout<<n<<"\t"<<d<<"\n";
+                k++;
+        }
+        return 0;
+}
