@@ -1,0 +1,38 @@
+#include<iostream>
+#include <vector>
+using namespace std;
+int flag=0;
+void combination(int ind,int n,int arr[],int target,vector<int>&ds)
+{
+  if(target==0)
+  {
+    flag=1;
+    for(int i=0;i<ds.size();i++)
+    cout<<ds[i]<<" ";
+    cout<<"\n";
+    return;
+  }
+  for(int i=ind;i<n;i++)
+  {
+    if(arr[i]>target) break;
+    ds.push_back(arr[i]);
+    combination(i+1,n,arr,target-arr[i],ds);
+    ds.pop_back();
+  }
+}
+int main()
+{
+    int n,target;
+    cout<<"enter the number of elements\n";
+    cin>>n;
+  int arr[n];
+  cout<<"enter elements in increasing order\n";
+  for(int i=0;i<n;i++)
+  cin>>arr[i];
+  cout<<"enter target\n";
+  cin>>target;
+  vector<int>ds;
+  combination(0,n,arr,target,ds);
+  if(flag==0)
+  cout<<"no solution\n";
+}
