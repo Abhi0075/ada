@@ -1,0 +1,77 @@
+#include<iostream>
+using namespace std;
+
+int top=-1;
+int g[10][10],in[10],stack[10],dis[10];
+
+void topologicalorder(int n)
+{
+    int u, k=0;
+    for(int i=0;i<n;i++)
+  {
+   for(int j=0;j<n;j++)
+    {
+      in[i]=in[i]+g[j][i];
+    }
+  }
+  
+    for(int i=0;i<n;i++)
+    {
+        if(in[i]==0)
+        {
+            stack[++top]=i;
+        }
+    }
+
+    while(top>=0)
+    { 
+        u=stack[top--];
+       dis[k++]=u;
+    for(int v=0;v<n;v++)
+    {
+      if(g[u][v]==1)
+      {
+        in[v]=(in[v]-1);
+        if(in[v]==0)
+        {
+            stack[++top]= v;
+        }
+      }
+    }
+    
+    }
+    cout<<"topological order >> ";
+    for(int v=0;v<n;v++)
+    {
+       cout<<dis[v]<<" ";
+    } 
+}
+
+int main()
+{
+    int n;
+  cout<<"enter the number of nodes \n";
+  cin>>n;
+  for(int i=0;i<n;i++)
+  {
+   for(int j=0;j<n;j++)
+    {
+      cout<<"Enter the 1 if edge from "<<i<<j<<" is present >>";
+      cin>>g[i][j];
+    }
+  }
+  
+  cout<<"your adjacency matrix\n";
+ 
+ for(int i=0;i<n;i++)
+  {
+   for(int j=0;j<n;j++)
+    {
+      cout<<g[i][j]<<" ";
+    }
+    cout<<"\n";
+  }
+ 
+topologicalorder(n);
+
+}
